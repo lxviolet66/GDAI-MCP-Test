@@ -1,0 +1,72 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbu6te7irwwk6"]
+
+[ext_resource type="Script" uid="uid://cyo8am7dhx63s" path="res://scenes/score_label.gd" id="1_5p55f"]
+[ext_resource type="Script" uid="uid://bcb0n5toib8sk" path="res://scenes/restart_button.gd" id="2_x4jx1"]
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ScoreLabel" type="Label" parent="." node_paths=PackedStringArray("score_timer") groups=["ScoreLabel"]]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.5
+offset_right = 52.5
+offset_bottom = 39.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 28
+text = "Score: 0"
+script = ExtResource("1_5p55f")
+score_timer = NodePath("../ScoreTimer")
+
+[node name="GameOverLabel" type="Label" parent="." groups=["GameOverLabel"]]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -44.0
+offset_right = 100.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 100
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="RestartButton" type="Button" parent="." groups=["RestartButton"]]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -179.0
+offset_top = -145.0
+offset_right = 179.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 6
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 100
+text = "Restart"
+script = ExtResource("2_x4jx1")
+
+[node name="ScoreTimer" type="Timer" parent="." groups=["ScoreTimer"]]
+autostart = true
+
+[connection signal="timeout" from="ScoreTimer" to="ScoreLabel" method="_on_score_timer_timeout"]

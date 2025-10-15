@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://ohlr5a0bi48v"]
+
+[ext_resource type="Texture2D" uid="uid://ccluom0i5m45r" path="res://icon.svg" id="1_7s4qf"]
+[ext_resource type="Script" uid="uid://bvtdenua0yh85" path="res://scenes/ball.gd" id="1_cxlvu"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_4dx81"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cxlvu"]
+radius = 0.5
+
+[node name="Ball" type="Node2D"]
+scale = Vector2(200, 200)
+script = ExtResource("1_cxlvu")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Mesh" type="MeshInstance2D" parent="Area2D"]
+mesh = SubResource("SphereMesh_4dx81")
+texture = ExtResource("1_7s4qf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_cxlvu")
+
+[node name="DeleteTimer" type="Timer" parent="."]
+wait_time = 12.0
+autostart = true
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="timeout" from="DeleteTimer" to="." method="_on_delete_timer_timeout"]

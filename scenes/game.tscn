@@ -1,0 +1,43 @@
+[gd_scene load_steps=8 format=3 uid="uid://b2moj62jt1xss"]
+
+[ext_resource type="Script" uid="uid://bcbvnn761cr4h" path="res://scenes/game.gd" id="1_lnu2h"]
+[ext_resource type="Script" uid="uid://d2o7karfo8xri" path="res://scenes/ball_spawner.gd" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://ohlr5a0bi48v" path="res://scenes/ball.tscn" id="3_lbhrr"]
+[ext_resource type="Material" uid="uid://dx1le4rl7bk26" path="res://scenes/ball.tres" id="4_iywne"]
+[ext_resource type="PackedScene" uid="uid://dbu6te7irwwk6" path="res://scenes/ui.tscn" id="5_iywne"]
+
+[sub_resource type="Curve" id="Curve_lnu2h"]
+_data = [Vector2(0, 0.1967634), 0.0, 1.306473, 0, 0, Vector2(1, 1), 0.050593477, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_iywne"]
+_limits = [0.5, 2.0, 0.0, 1.0]
+_data = [Vector2(0, 2), 0.0, -1.5, 0, 1, Vector2(1, 0.5), -1.5, 0.0, 1, 0]
+point_count = 2
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("ball_timer", "ball_spawner")]
+script = ExtResource("1_lnu2h")
+speed_curve = SubResource("Curve_lnu2h")
+ball_curve = SubResource("Curve_iywne")
+ball_timer = NodePath("BallTimer")
+ball_spawner = NodePath("BallSpawner")
+
+[node name="BallSpawner" type="Node" parent="."]
+script = ExtResource("1_uwrxv")
+ball_scene = ExtResource("3_lbhrr")
+material = ExtResource("4_iywne")
+
+[node name="BallTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="UI" parent="." instance=ExtResource("5_iywne")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[connection signal="timeout" from="BallTimer" to="BallSpawner" method="_on_ball_timer_timeout"]

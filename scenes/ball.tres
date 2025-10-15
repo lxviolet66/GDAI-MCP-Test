@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dx1le4rl7bk26"]
+
+[ext_resource type="Shader" uid="uid://kcsvjfxnaflg" path="res://scenes/ball.gdshader" id="1_p721k"]
+
+[resource]
+shader = ExtResource("1_p721k")
+shader_parameter/Shift_Hue = 0.0
