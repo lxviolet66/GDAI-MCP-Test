@@ -11,6 +11,8 @@ func _on_ball_timer_timeout() -> void:
 	var ball: Node2D = ball_scene.instantiate()
 	add_child(ball)
 	
+	ball.difficulty_snapshot = get_parent().difficulty
+	
 	var swap_side := bool(randi_range(0, 1))
 	
 	if swap_side:
